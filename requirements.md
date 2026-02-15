@@ -311,19 +311,7 @@ A comprehensive platform with five core modules:
 6. THE System SHALL provide data export in CSV, Excel, and PDF formats
 7. WHEN viewing reports, THE System SHALL show comparison metrics against previous periods
 
-### Requirement 20: Customer Support Integration
 
-**User Story:** As a seller, I want integrated customer support tools, so that I can resolve issues efficiently.
-
-#### Acceptance Criteria
-
-1. WHEN customers contact support, THE System SHALL provide sellers with complete order and return history
-2. THE System SHALL suggest resolution templates based on issue type
-3. WHEN support tickets are created, THE System SHALL track response times and resolution rates
-4. THE System SHALL integrate with common helpdesk platforms via API
-5. WHEN issues are resolved, THE System SHALL collect customer satisfaction ratings
-6. THE System SHALL generate support performance reports monthly
-7. WHEN support metrics fall below targets, THE Alert_System SHALL notify sellers
 
 ## Non-Functional Requirements
 
