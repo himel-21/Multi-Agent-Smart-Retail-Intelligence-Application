@@ -1,0 +1,18 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AmazonBedrockAgentsMultiAgentsPoliciesProd",
+            "Effect": "Allow",
+            "Action": [
+                "bedrock:GetAgentAlias",
+                "bedrock:InvokeAgent"
+            ],
+            "Resource": [
+                "arn:aws:bedrock:ap-south-1:686316018194:agent-alias/THNS1L6LHS/829RGWVLK0",
+                "arn:aws:bedrock:ap-south-1:686316018194:agent-alias/A4KTDYK20F/DD4TV08DTU",
+                "arn:aws:bedrock:ap-south-1:686316018194:agent-alias/XFACBEYZIM/4EQGVLEHEK"
+            ]
+        }
+    ]
+}
