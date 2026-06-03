@@ -1,0 +1,56 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AI Readiness Score API",
+    "version": "1.0.0",
+    "description": "API to get AI readiness scores for products"
+  },
+  "paths": {
+    "/get-ai-readiness-score": {
+      "get": {
+        "summary": "Get AI readiness score for products",
+        "description": "Search for products and return AI readiness scores based on user type",
+        "operationId": "get_ai_readiness_score",
+        "parameters": [
+          {
+            "name": "search_query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Product name to search for (e.g., 'recliner sofa', 'smartphone')"
+          },
+          {
+            "name": "user_type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["customer", "retailer"]
+            },
+            "description": "Type of user - customer (wants high-quality products) or retailer (wants improvement opportunities)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with product recommendations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "description": "Natural language response with product recommendations"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

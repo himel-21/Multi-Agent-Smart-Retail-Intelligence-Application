@@ -1,0 +1,46 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Product Verification API",
+    "description": "API for verifying product authenticity and awarding genuine badges",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/verify-product-authenticity": {
+      "post": {
+        "summary": "Verify product authenticity",
+        "description": "Verify if a product qualifies for a genuine badge",
+        "operationId": "verifyProductAuthenticity",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_name": {
+                    "type": "string",
+                    "description": "The exact name of the product to verify"
+                  }
+                },
+                "required": ["product_name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Verification completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

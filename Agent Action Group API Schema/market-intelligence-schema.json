@@ -1,0 +1,62 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Marketplace API",
+    "version": "1.0.0",
+    "description": "Marketplace intelligence API"
+  },
+  "paths": {
+    "/marketplace-intelligence": {
+      "post": {
+        "operationId": "getMarketplaceIntelligence",
+        "summary": "Get marketplace intelligence",
+        "description": "Retrieve product information and marketplace data",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userQuery": {
+                    "type": "string",
+                    "description": "User's product query or search term"
+                  },
+                  "userType": {
+                    "type": "string",
+                    "description": "Type of user - customer or retailer",
+                    "enum": ["customer", "retailer"],
+                    "default": "customer"
+                  }
+                },
+                "required": ["userQuery"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

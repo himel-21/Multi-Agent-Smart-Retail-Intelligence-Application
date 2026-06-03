@@ -1,0 +1,210 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AI Assessment Orchestrator API",
+    "version": "1.0.0",
+    "description": "API for Bedrock Supervisor Agent to invoke Lambda orchestrator function"
+  },
+  "paths": {
+    "/orchestrate-assessment": {
+      "post": {
+        "summary": "Orchestrate AI Assessment",
+        "description": "Coordinates AI readiness scoring and badge verification through Lambda function",
+        "operationId": "orchestrateAssessment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssessmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Assessment completed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssessmentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AssessmentRequest": {
+        "type": "object",
+        "required": ["userQuery", "userType"],
+        "properties": {
+          "userQuery": {
+            "type": "string",
+            "description": "Natural language query from user",
+            "example": "What is my AI readiness score and what badges can I earn?"
+          },
+          "userType": {
+            "type": "string",
+            "enum": ["customer", "retailer"],
+            "description": "Type of user making the request",
+            "example": "customer"
+          },
+          "requestId": {
+            "type": "string",
+            "description": "Unique request identifier",
+            "example": "req_1234567890_abc123"
+          },
+          "sessionContext": {
+            "type": "object",
+            "properties": {
+              "previousInteractions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Previous user interactions in this session"
+              },
+              "userPreferences": {
+                "type": "object",
+                "description": "User preferences and settings"
+              }
+            }
+          }
+        }
+      },
+      "AssessmentResponse": {
+        "type": "object",
+        "properties": {
+          "aiReadinessScore": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "AI readiness score from 0-100"
+          },
+          "aiReadinessLevel": {
+            "type": "string",
+            "enum": ["Beginner", "Intermediate", "Advanced", "Expert"],
+            "description": "AI readiness level category"
+          },
+          "availableBadges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Badge"
+            },
+            "description": "List of badges user can earn"
+          },
+          "earnedBadges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Badge"
+            },
+            "description": "List of badges user has already earned"
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Personalized recommendations for improvement"
+          },
+          "nextSteps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Suggested next steps for the user"
+          },
+          "assessmentSummary": {
+            "type": "string",
+            "description": "Comprehensive assessment summary"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Assessment completion timestamp"
+          }
+        }
+      },
+      "Badge": {
+        "type": "object",
+        "properties": {
+          "badgeId": {
+            "type": "string",
+            "description": "Unique badge identifier"
+          },
+          "badgeName": {
+            "type": "string",
+            "description": "Display name of the badge"
+          },
+          "badgeDescription": {
+            "type": "string",
+            "description": "Description of what the badge represents"
+          },
+          "badgeCategory": {
+            "type": "string",
+            "enum": ["AI Fundamentals", "Machine Learning", "Data Science", "AI Ethics", "Business AI"],
+            "description": "Category of the badge"
+          },
+          "difficultyLevel": {
+            "type": "string",
+            "enum": ["Beginner", "Intermediate", "Advanced"],
+            "description": "Difficulty level required for this badge"
+          },
+          "requirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Requirements to earn this badge"
+          },
+          "estimatedTimeToEarn": {
+            "type": "string",
+            "description": "Estimated time to earn this badge",
+            "example": "2-4 weeks"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "errorCode": {
+            "type": "string",
+            "description": "Error code for debugging"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
